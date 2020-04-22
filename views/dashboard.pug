@@ -1,0 +1,33 @@
+extends layout
+
+block layout-content
+    nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+        ul.navbar-nav.mr-auto
+            li.nav-item.active
+            a.nav-link.active(href='#') Dashboard
+        form.form-inline.my-2.my-lg-0(action="/logout", method="post")
+            button.btn.my-2.my-sm-0(type='submit') Logout
+
+
+    div.container
+        a(href="/create-user") Create
+        table.table.table-striped
+            thead
+                tr
+                    th(scope='col') ID
+                    th(scope='col') Username
+                    th(scope='col') Email
+                    th(scope='col') Fullname
+                    th(scope='col') Role
+                    th(scope='col') Action
+            tbody
+                each row in data.rows
+                    tr
+                        th(scope='row') #{row.id}
+                        td #{row.username}
+                        td #{row.email}
+                        td #{row.fullname}
+                        td #{row.role_name}
+                        td
+                            - var id = row.id
+                            a(href="/edit-user/" + id) Edit

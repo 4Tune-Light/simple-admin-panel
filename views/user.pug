@@ -1,0 +1,40 @@
+extends layout
+
+block layout-content
+    nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+        ul.navbar-nav.mr-auto
+            li.nav-item.active
+            a.nav-link.active(href='#') Dashboard
+        form.form-inline.my-2.my-lg-0(action="/logout", method="post")
+            button.btn.my-2.my-sm-0(type='submit') Logout
+
+
+    div.container
+        .card(style="margin: 2rem 0")
+            .card-header
+                h3 User
+            .card-body
+                form(action=data.action, method="post")
+                    if data.err
+                        h4(style="color: red;") #{data.err}
+                    .form-group
+                        label(for='username') Username
+                        input#username.form-control(type='text', name="username", value=data.user.username, placeholder='Enter username...', required)
+                    .form-group
+                        label(for='email') Email address
+                        input#email.form-control(type='email', name="email", value=data.user.email placeholder='Enter email address...', required)
+                    .form-group
+                        label(for='password') Password
+                        input#password.form-control(type='password', name="password", placeholder='Enter password...', required=data.required)
+                    .form-group
+                        label(for='fullname') Fullname
+                        input#fullname.form-control(type='text', name="fullname", value=data.user.fullname placeholder='Enter fullname...', required)
+                    .form-group
+                        label(for='role_id') Role
+                        select#role_id.form-control(name="role_id", value=data.user.role_id, required)
+                            each role in data.roles
+                                option(value=role.id) #{role.name}
+                    .form-group.form-check
+                        button.btn.btn-info(type='submit') Submit
+
+        
