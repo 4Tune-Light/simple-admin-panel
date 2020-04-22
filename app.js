@@ -44,7 +44,7 @@ app.use(function(req, res) {
 });
 
 app.use(function(err, req, res) {
-    console.log(err)
+    if (process.env.NODE_ENV === "DEVELOPMENT") console.log(err)
     res.send('500 Server Internal Error');
 });
 
